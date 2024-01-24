@@ -40,7 +40,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   }, {
     interactionType: InteractionType.Redirect,
     protectedResourceMap: new Map([
-      ["https://localhost:7100/", ["https://sideriantest.onmicrosoft.com/api/FullAccess"]] 
+      ["https://localhost:7197/WeatherForecast", ["https://sideriantest.onmicrosoft.com/api/FullAccess"]] 
   ]),
   })
   ],
