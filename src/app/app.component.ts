@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { ApiService } from './api.service';
 import { Weather } from './model/weather';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -56,6 +55,7 @@ export class AppComponent  {
       .subscribe(
         (response) => {
           const accesstoken = response.accessToken;
+          localStorage.setItem("authToken", accesstoken);
           this.accessTokenHere = true;
           // Handle successful login
           console.log(response);

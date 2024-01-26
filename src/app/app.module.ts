@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MsalBroadcastService, MsalGuard, MsalInterceptor, MsalModule, MsalService} from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType , BrowserCacheLocation } from "@azure/msal-browser";
+import { InterceptorService } from './interceptor.service';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -50,6 +51,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     useClass: MsalInterceptor,
     multi: true
     },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     MsalService,
     MsalGuard,
     MsalBroadcastService,
