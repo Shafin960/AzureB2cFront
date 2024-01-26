@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-
-
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MsalBroadcastService, MsalGuard, MsalInterceptor, MsalModule, MsalService} from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType , BrowserCacheLocation } from "@azure/msal-browser";
 import { InterceptorService } from './interceptor.service';
+
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 

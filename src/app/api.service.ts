@@ -22,12 +22,7 @@ export class ApiService {
     });
   }
 
-  getData(accessToken: string) {
-    // Including access token here for authorization
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${accessToken}`,
-    });
-
-    return this.http.get<any[]>(this.apiUrl, { headers });
+  getData() {
+    return this.http.get<any[]>(this.apiUrl);
   }
 }

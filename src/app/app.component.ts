@@ -27,7 +27,7 @@ export class AppComponent  {
         (response) => {
           const accesstoken = response.accessToken;
           this.accessTokenHere = true;
-          // Handle successful login
+          
           console.log(response);
 
           this.apiService.getDataFromjQuery(accesstoken).then(
@@ -41,7 +41,7 @@ export class AppComponent  {
           );
         },
         (error) => {
-          // Handle login error
+          
           console.error('Login failed:', error);
         }
       );
@@ -57,12 +57,12 @@ export class AppComponent  {
           const accesstoken = response.accessToken;
           localStorage.setItem("authToken", accesstoken);
           this.accessTokenHere = true;
-          // Handle successful login
+          
           console.log(response);
-          this.apiService.getData(accesstoken).subscribe(
+          this.apiService.getData().subscribe(
             (data) => {
               this.weatherData = data;
-              //console.log('API Data:', data);
+              
             },
             (error) => {
               console.error('API Request Error:', error);
@@ -70,9 +70,16 @@ export class AppComponent  {
           );
         },
         (error) => {
-          // Handle login error
+          
           console.error('Login failed:', error);
         }
       );
   }
+
+  logout() {
+    localStorage.removeItem('authToken');
+    this.authService.logoutPopup({
+        mainWindowRedirectUri: "/"
+    });
+}
 }
