@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { ApiService } from './api.service';
 import { Weather } from './model/weather';
@@ -9,18 +9,43 @@ import * as $ from 'jquery';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   title = 'demob2c';
   accessTokenHere = false;
   weatherData: Weather[] = [];
+  weatherDatabyJquery: Weather[]=[];
   constructor(
     private authService: MsalService,
     private apiService: ApiService
   ) {}
-  ngOnInit(): void {
-    $('button').click(function () {
-      $('#result').html('<b>jQuery used in angular by installation.</b>');
-    });
+
+  signInAjax(){
+    this.authService
+      .loginPopup({
+        scopes: ['https://sideriantest.onmicrosoft.com/api/FullAccess'],
+      })
+      .subscribe(
+        (response) => {
+          const accesstoken = response.accessToken;
+          this.accessTokenHere = true;
+          // Handle successful login
+          console.log(response);
+
+          this.apiService.getDataFromjQuery(accesstoken).then(
+            (data) => {
+              this.weatherDatabyJquery = data;
+              console.log('API Data:', data);
+            },
+            (error) => {
+              console.error('API Request Error:', error);
+            }
+          );
+        },
+        (error) => {
+          // Handle login error
+          console.error('Login failed:', error);
+        }
+      );
   }
 
   signIn() {

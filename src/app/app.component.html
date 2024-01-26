@@ -1,11 +1,29 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col">
-      <h1 style="color: green">GeeksforGeeks</h1>
-      <h2>Jquery in Angular</h2>
-      <button>click me</button>
-      <p id="result"></p>
+      <div class="container text-center">
+        <button class="btn btn-primary mb-4" (click)="signInAjax()">
+          SignInJquery
+        </button>
+      </div>
+      <div *ngIf="accessTokenHere">
+        <div *ngFor="let i of weatherDatabyJquery" class="mt-5">
+          <p><span style="font-weight: bold"> Date:</span> {{ i.date }}</p>
+          <p>
+            <span style="font-weight: bold"> Summary: </span> {{ i.summary }}
+          </p>
+          <p>
+            <span style="font-weight: bold"> Temperature in Celsius:</span>
+            {{ i.temperatureC }}
+          </p>
+          <p>
+            <span style="font-weight: bold"> Temperature in Fahrenheit:</span>
+            {{ i.temperatureF }}
+          </p>
+        </div>
+      </div>
     </div>
+
     <div class="col">
       <div class="container text-center">
         <button class="btn btn-primary mb-4" (click)="signIn()">SignIn</button>
@@ -28,6 +46,5 @@
         </div>
       </div>
     </div>
-    <div class="col"></div>
   </div>
 </div>
